@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Experienced Application</title>
+  <link rel="stylesheet" href="src/css/experience.css" />
+</head>
+<body>
+    <div class="header">
+    <a href="fresher.html" class="nav-tab ">Fresher</a>
+    <a href="experience.html" class="nav-tab active">Experienced</a>
+  </div>
+  <h2>Experienced Application Form</h2>
+  <form id="expForm" onsubmit="return validateExpForm()">
+    <label>Full Name <input type="text" id="fullName" required /></label>
+    <label>Phone No <input type="text" id="phone" required /></label>
+    <label>Email (@gmail.com) <input type="email" id="email" required /></label>
+    <label>Aadhar No (12 digits) <input type="text" id="aadhar" required /></label>
+    <label>PAN No (12 digits) <input type="text" id="pan" required /></label>
+    <label>10th Certificate <input type="file" id="cert10" accept=".pdf,.doc" required /></label>
+    <label>Inter Certificate <input type="file" id="certInter" accept=".pdf,.doc" required /></label>
+    <label>Degree Certificate <input type="file" id="certDegree" accept=".pdf,.doc" required /></label>
+    <label>Previous Company Name <input type="text" required /></label>
+    <label>Offer Letter <input type="file" id="offer" accept=".pdf,.doc" required /></label>
+    <label>Experience Letter <input type="file" id="expLetter" accept=".pdf,.doc" required /></label>
+    <label>Relieving Letter <input type="file" id="relieve" accept=".pdf,.doc" required /></label>
+    <label>Pay Slips <input type="file" id="payslip" accept=".pdf,.doc" required /></label>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    function validateExpForm() {
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const aadhar = document.getElementById('aadhar').value;
+      const pan = document.getElementById('pan').value;
+
+      if (!email.endsWith("@gmail.com")) {
+        alert("Only Gmail addresses allowed.");
+        return false;
+      }
+
+      if (!/^\d{10}$/.test(phone)) {
+        alert("Phone must be 10 digits.");
+        return false;
+      }
+
+      if (!/^\d{12}$/.test(aadhar) || !/^\d{12}$/.test(pan)) {
+        alert("Aadhar and PAN must be 12 digits.");
+        return false;
+      }
+
+      const files = ["cert10", "certInter", "certDegree", "offer", "expLetter", "relieve", "payslip"];
+      for (const id of files) {
+        const file = document.getElementById(id).files[0];
+        if (!file || !/\.(pdf|doc)$/i.test(file.name)) {
+          alert(`Upload valid PDF/DOC for ${id}`);
+          return false;
+        }
+      }
+
+      alert("Experienced Form Submitted!");
+      return true;
+    }
+  </script>
+</body>
+</html>
