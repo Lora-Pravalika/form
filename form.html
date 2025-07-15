@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Job Application Form</title>
+  <link rel="stylesheet" href="src/JobApplication/form.css" />
+</head>
+<body>
+  <h2>Job Application Form</h2>
+
+  <form id="jobForm">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" required />
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" required />
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" pattern="[0-9]{10}" required />
+    </div>
+
+    <div class="form-group">
+      <label for="aadhar">Aadhar Number</label>
+      <input type="text" id="aadhar" pattern="\d{12}" required />
+    </div>
+
+    <div class="form-group">
+      <label for="pan">PAN Number</label>
+      <input type="text" id="pan" pattern="[A-Z]{5}[0-9]{4}[A-Z]" required />
+    </div>
+
+    <div class="form-group">
+      <label for="resume">Upload Resume (PDF only)</label>
+      <input type="file" id="resume" accept=".pdf" required />
+    </div>
+
+    <button type="submit">Submit Application</button>
+  </form>
+
+  <!-- Fresher navigation -->
+  <div class="nav-link">
+    <a href="fresher.html">
+      <button type="button">Are You a Fresher? Click Here</button>
+    </a>
+  </div>
+
+  <script src="form.js"></script>
+</body>
+</html>
