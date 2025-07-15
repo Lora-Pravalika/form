@@ -6,60 +6,94 @@
   <link rel="stylesheet" href="src/css/experience.css" />
 </head>
 <body>
-    <div class="header">
-    <a href="fresher.html" class="nav-tab ">Fresher</a>
+  <div class="header">
+    <a href="fresher.html" class="nav-tab">Fresher</a>
     <a href="experience.html" class="nav-tab active">Experienced</a>
   </div>
-  <h2>Experienced Application Form</h2>
-  <form id="expForm" onsubmit="return validateExpForm()">
-    <label>Full Name <input type="text" id="fullName" required /></label>
-    <label>Phone No <input type="text" id="phone" required /></label>
-    <label>Email (@gmail.com) <input type="email" id="email" required /></label>
-    <label>Aadhar No (12 digits) <input type="text" id="aadhar" required /></label>
-    <label>PAN No (12 digits) <input type="text" id="pan" required /></label>
-    <label>10th Certificate <input type="file" id="cert10" accept=".pdf,.doc" required /></label>
-    <label>Inter Certificate <input type="file" id="certInter" accept=".pdf,.doc" required /></label>
-    <label>Degree Certificate <input type="file" id="certDegree" accept=".pdf,.doc" required /></label>
-    <label>Previous Company Name <input type="text" required /></label>
-    <label>Offer Letter <input type="file" id="offer" accept=".pdf,.doc" required /></label>
-    <label>Experience Letter <input type="file" id="expLetter" accept=".pdf,.doc" required /></label>
-    <label>Relieving Letter <input type="file" id="relieve" accept=".pdf,.doc" required /></label>
-    <label>Pay Slips <input type="file" id="payslip" accept=".pdf,.doc" required /></label>
-    <button type="submit">Submit</button>
-  </form>
+
+  <div class="forming2">
+    <div class="form-header">
+      <h2>💼 Experienced Application</h2>
+      <p>Please upload your past experience details.</p>
+    </div>
+
+    <form id="expForm" onsubmit="return validateExpForm()">
+      <label>Full Name <span class="required">*</span><input type="text" id="fullName" required /></label>
+      <label>Phone No <span class="required">*</span><input type="text" id="phone" required  placeholder="+91"/></label>
+      <label>Email <span class="required">*</span><input type="email" id="email" required /></label>
+      <label>Aadhar No <span class="required">*</span><input type="text" id="aadhar" required /></label>
+      <label>PAN No <span class="required">*</span><input type="text" id="pan" required /></label>
+      <label>10th School Name  <span class="required">*</span><input type="text" required /></label>
+      <label>10th Certificate (PDF or DOC)<span class="required">*</span><input type="file" id="cert10" accept=".pdf,.doc" required /></label>
+      <label>Inter Certificate (PDF or DOC)<span class="required">*</span><input type="file" id="certInter" accept=".pdf,.doc" required /></label>
+      <label>Degree Certificate(PDF or DOC) <span class="required">*</span><input type="file" id="certDegree" accept=".pdf,.doc" required /></label>
+      <label>Previous Company Name <span class="required">*</span><input type="text" id="company" required /></label>
+      <label>Offer Letter(PDF or DOC) <span class="required">*</span><input type="file" id="offer" accept=".pdf,.doc" required /></label>
+      <label>Experience Letter(PDF or DOC) <span class="required">*</span><input type="file" id="expLetter" accept=".pdf,.doc" required /></label>
+      <label>Relieving Letter(PDF or DOC) <span class="required">*</span><input type="file" id="relieve" accept=".pdf,.doc" required /></label>
+      <label>Pay Slips(PDF or DOC) <span class="required">*</span><input type="file" id="payslip" accept=".pdf,.doc" required /></label>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
 
   <script>
     function validateExpForm() {
-      const email = document.getElementById('email').value;
-      const phone = document.getElementById('phone').value;
-      const aadhar = document.getElementById('aadhar').value;
-      const pan = document.getElementById('pan').value;
+      let errors = [];
+      const errorFields = [];
 
-      if (!email.endsWith("@gmail.com")) {
-        alert("Only Gmail addresses allowed.");
-        return false;
+      document.querySelectorAll("input").forEach(input => input.classList.remove("error"));
+
+      const email = document.getElementById("email");
+      const phone = document.getElementById("phone");
+      const aadhar = document.getElementById("aadhar");
+      const pan = document.getElementById("pan");
+
+      if (!email.value.endsWith("@gmail.com")) {
+        errors.push("Email must be a valid @gmail.com address.");
+        errorFields.push(email);
       }
 
-      if (!/^\d{10}$/.test(phone)) {
-        alert("Phone must be 10 digits.");
-        return false;
+      if (!/^\d{10}$/.test(phone.value)) {
+        errors.push("Phone number must be 10 digits.");
+        errorFields.push(phone);
       }
 
-      if (!/^\d{12}$/.test(aadhar) || !/^\d{12}$/.test(pan)) {
-        alert("Aadhar and PAN must be 12 digits.");
-        return false;
+      if (!/^\d{12}$/.test(aadhar.value)) {
+        errors.push("Aadhar number must be 12 digits.");
+        errorFields.push(aadhar);
       }
 
-      const files = ["cert10", "certInter", "certDegree", "offer", "expLetter", "relieve", "payslip"];
-      for (const id of files) {
-        const file = document.getElementById(id).files[0];
-        if (!file || !/\.(pdf|doc)$/i.test(file.name)) {
-          alert(`Upload valid PDF/DOC for ${id}`);
-          return false;
+      if (!/^\d{12}$/.test(pan.value)) {
+        errors.push("PAN number must be 12 digits.");
+        errorFields.push(pan);
+      }
+
+      const files = {
+        cert10: "10th Certificate",
+        certInter: "Inter Certificate",
+        certDegree: "Degree Certificate",
+        offer: "Offer Letter",
+        expLetter: "Experience Letter",
+        relieve: "Relieving Letter",
+        payslip: "Pay Slips"
+      };
+
+      for (const [id, label] of Object.entries(files)) {
+        const file = document.getElementById(id);
+        if (!file.files[0] || !/\.(pdf|doc)$/i.test(file.files[0].name)) {
+          errors.push(`${label} must be a valid PDF or DOC.`);
+          errorFields.push(file);
         }
       }
 
-      alert("Experienced Form Submitted!");
+      errorFields.forEach(f => f.classList.add("error"));
+
+      if (errors.length > 0) {
+        alert("🔴 Please fix:\n- " + errors.join("\n- "));
+        return false;
+      }
+
+      alert("✅ Experienced Form Submitted!");
       return true;
     }
   </script>
