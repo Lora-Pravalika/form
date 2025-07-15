@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fresher Application</title>
+  <link rel="stylesheet" href="src/css/fresher.css" />
+</head>
+<body>
+     <div class="header">
+    <a href="fresher.html" class="nav-tab active">Fresher</a>
+    <a href="experience.html" class="nav-tab">Experienced</a>
+  </div>
+  <h2>Fresher Application Form</h2>
+  <form id="fresherForm" onsubmit="return validateFresherForm()">
+    <label>Full Name <input type="text" id="fullName" required /></label>
+    <label>Phone No <input type="text" id="phone" required /></label>
+    <label>Email (@gmail.com) <input type="email" id="email" required /></label>
+    <label>Aadhar No (12 digits) <input type="text" id="aadhar" required /></label>
+    <label>PAN No (12 digits) <input type="text" id="pan" required /></label>
+    <label>10th School Name <input type="text" required /></label>
+    <label>10th Certificate <input type="file" id="cert10" accept=".pdf,.doc" required /></label>
+    <label>Inter Certificate <input type="file" id="certInter" accept=".pdf,.doc" required /></label>
+    <label>Degree College Name <input type="text" required /></label>
+    <label>Degree Certificate <input type="file" id="certDegree" accept=".pdf,.doc" required /></label>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    function validateFresherForm() {
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const aadhar = document.getElementById('aadhar').value;
+      const pan = document.getElementById('pan').value;
+
+      if (!email.endsWith("@gmail.com")) {
+        alert("Only Gmail addresses allowed.");
+        return false;
+      }
+
+      if (!/^\d{10}$/.test(phone)) {
+        alert("Phone must be 10 digits.");
+        return false;
+      }
+
+      if (!/^\d{12}$/.test(aadhar) || !/^\d{12}$/.test(pan)) {
+        alert("Aadhar and PAN must be 12 digits.");
+        return false;
+      }
+
+      const files = ["cert10", "certInter", "certDegree"];
+      for (const id of files) {
+        const file = document.getElementById(id).files[0];
+        if (!file || !/\.(pdf|doc)$/i.test(file.name)) {
+          alert(`Upload a valid PDF/DOC for ${id}`);
+          return false;
+        }
+      }
+
+      alert("Fresher Form Submitted!");
+      return true;
+    }
+  </script>
+</body>
+</html>
