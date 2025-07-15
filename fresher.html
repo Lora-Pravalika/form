@@ -1,3 +1,4 @@
+<!-- ✅ fresher.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,85 +7,91 @@
   <link rel="stylesheet" href="src/css/fresher.css" />
 </head>
 <body>
-  <div class="header">
-    <a href="fresher.html" class="nav-tab active">Fresher</a>
-    <a href="experience.html" class="nav-tab">Experienced</a>
-  </div>
-
-  <div class="forming">
-    <div class="form-header">
-      <h2>👋 Fresher Application</h2>
-      <p>Please fill out all required fields.</p>
+  <div class="page">
+    <div class="header">
+      <a href="fresher.html" class="nav-tab active">🎓 Fresher</a>
+      <a href="experience.html" class="nav-tab">💼 Experienced</a>
     </div>
 
-    <form id="fresherForm" onsubmit="return validateFresherForm()">
-      <label>Full Name <span class="required">*</span><input type="text" id="fullName" required /></label>
-      <label>Phone No <span class="required">*</span><input type="text" id="phone"  placeholder="+91" required /></label>
-      <label>Email <span class="required">*</span><input type="email" id="email" required /></label>
-      <label>Aadhar No <span class="required">*</span><input type="text" id="aadhar" required /></label>
-      <label>PAN No <span class="required">*</span><input type="text" id="pan" required /></label>
-      <label>10th School Name  <span class="required">*</span><input type="text" required /></label>
-      <label>10th Certificate (PDF or DOC) <span class="required">*</span><input type="file" id="cert10" accept=".pdf,.doc" required /></label>
-      <label>Inter Certificate (PDF or DOC)<span class="required">*</span><input type="file" id="certInter" accept=".pdf,.doc" required /></label>
-      <label>Degree College Name <span class="required">*</span><input type="text" required /></label>
-      <label>Degree Certificate (PDF or DOC)<span class="required">*</span><input type="file" id="certDegree" accept=".pdf,.doc" required /></label>
-      <button type="submit">Submit</button>
-    </form>
+    <div class="forming">
+      <div class="form-header">
+        <h2>🎓 Fresher Application</h2>
+        <p>Please fill out all required fields.</p>
+      </div>
+
+      <form id="fresherForm" onsubmit="return validateFresherForm()">
+        <h3>📄 Personal Details</h3>
+        <label>Full Name <span class="required">*</span><input type="text" id="fullName" required /></label>
+        <label>Phone No <span class="required">*</span><input type="text" id="phone"  placeholder="+91" required /></label>
+        <label>Email <span class="required">*</span><input type="email" id="email" required /></label>
+        <label>Aadhar No <span class="required">*</span><input type="text" id="aadhar" required /></label>
+        <label>PAN No <span class="required">*</span><input type="text" id="pan" required /></label>
+
+        <h3>🎓 Education Details</h3>
+        <label>10th School Name  <span class="required">*</span><input type="text" required /></label>
+        <label>10th Certificate (PDF or DOC) <span class="required">*</span><input type="file" id="cert10" accept=".pdf,.doc" required /></label>
+        <label>Inter Certificate (PDF or DOC)<span class="required">*</span><input type="file" id="certInter" accept=".pdf,.doc" required /></label>
+        <label>Degree College Name <span class="required">*</span><input type="text" required /></label>
+        <label>Degree Certificate (PDF or DOC)<span class="required">*</span><input type="file" id="certDegree" accept=".pdf,.doc" required /></label>
+
+        <button type="submit">Submit</button>
+        <div id="success-msg" class="hidden">✅ Thank you! Form submitted successfully.</div>
+      </form>
+    </div>
   </div>
 
-  <script>
-    function validateFresherForm() {
-      let errors = [];
-      const errorFields = [];
+<script>
+  function validateFresherForm() {
+    let errors = [];
+    const errorFields = [];
+    document.querySelectorAll("input").forEach(input => input.classList.remove("error"));
 
-      document.querySelectorAll("input").forEach(input => input.classList.remove("error"));
+    const email = document.getElementById("email");
+    const phone = document.getElementById("phone");
+    const aadhar = document.getElementById("aadhar");
+    const pan = document.getElementById("pan");
+    const cert10 = document.getElementById("cert10");
+    const certInter = document.getElementById("certInter");
+    const certDegree = document.getElementById("certDegree");
 
-      const email = document.getElementById("email");
-      const phone = document.getElementById("phone");
-      const aadhar = document.getElementById("aadhar");
-      const pan = document.getElementById("pan");
-      const cert10 = document.getElementById("cert10");
-      const certInter = document.getElementById("certInter");
-      const certDegree = document.getElementById("certDegree");
-
-      if (!email.value.endsWith("@gmail.com")) {
-        errors.push("Email must be a valid @gmail.com address.");
-        errorFields.push(email);
-      }
-
-      if (!/^\d{10}$/.test(phone.value)) {
-        errors.push("Phone number must be 10 digits.");
-        errorFields.push(phone);
-      }
-
-      if (!/^\d{12}$/.test(aadhar.value)) {
-        errors.push("Aadhar number must be 12 digits.");
-        errorFields.push(aadhar);
-      }
-
-      if (!/^\d{12}$/.test(pan.value)) {
-        errors.push("PAN number must be 12 digits.");
-        errorFields.push(pan);
-      }
-
-      [cert10, certInter, certDegree].forEach((fileInput, i) => {
-        const labels = ["10th Certificate", "Inter Certificate", "Degree Certificate"];
-        if (!fileInput.files[0] || !/\.(pdf|doc)$/i.test(fileInput.files[0].name)) {
-          errors.push(`${labels[i]} must be a valid PDF or DOC.`);
-          errorFields.push(fileInput);
-        }
-      });
-
-      errorFields.forEach(f => f.classList.add("error"));
-
-      if (errors.length > 0) {
-        alert("🔴 Please fix:\n- " + errors.join("\n- "));
-        return false;
-      }
-
-      alert("✅ Form submitted!");
-      return true;
+    if (!email.value.endsWith("@gmail.com")) {
+      errors.push("Email must be a valid @gmail.com address.");
+      errorFields.push(email);
     }
-  </script>
+
+    if (!/^\d{10}$/.test(phone.value)) {
+      errors.push("Phone number must be 10 digits.");
+      errorFields.push(phone);
+    }
+
+    if (!/^\d{12}$/.test(aadhar.value)) {
+      errors.push("Aadhar number must be 12 digits.");
+      errorFields.push(aadhar);
+    }
+
+    if (!/^\d{12}$/.test(pan.value)) {
+      errors.push("PAN number must be 12 digits.");
+      errorFields.push(pan);
+    }
+
+    [cert10, certInter, certDegree].forEach((fileInput, i) => {
+      const labels = ["10th Certificate", "Inter Certificate", "Degree Certificate"];
+      if (!fileInput.files[0] || !/\.(pdf|doc)$/i.test(fileInput.files[0].name)) {
+        errors.push(`${labels[i]} must be a valid PDF or DOC.`);
+        errorFields.push(fileInput);
+      }
+    });
+
+    errorFields.forEach(f => f.classList.add("error"));
+
+    if (errors.length > 0) {
+      alert("🔴 Please fix:\n- " + errors.join("\n- "));
+      return false;
+    }
+
+    document.getElementById("success-msg").classList.remove("hidden");
+    return false; // prevent default for demo
+  }
+</script>
 </body>
 </html>
