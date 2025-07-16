@@ -3,44 +3,79 @@
 <head>
   <meta charset="UTF-8" />
   <title>Experienced Application</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="src/css/experience.css" />
 </head>
 <body>
   <div class="page">
     <div class="header">
-      <a href="fresher.html" class="nav-tab">Fresher</a>
-      <a href="experience.html" class="nav-tab active">Experienced</a>
+      <a href="fresher.html" class="nav-tab">🎓 Fresher</a>
+      <a href="experience.html" class="nav-tab active">💼 Experienced</a>
     </div>
 
     <div class="forming">
       <div class="form-header">
         <h2>💼 Experienced Application</h2>
-        <p>Please upload your past experience details.</p>
+        <p>Please upload your previous employment documents.</p>
       </div>
 
       <form id="expForm" onsubmit="return validateExpForm()">
-        <h3>🧑 Personal Info</h3>
-        <label>Full Name <span class="required">*</span><input type="text" id="fullName" required /></label>
-        <label>Phone No <span class="required">*</span><input type="text" id="phone" placeholder="+91" required /></label>
-        <label>Email <span class="required">*</span><input type="email" id="email" required /></label>
-        <label>Aadhar No <span class="required">*</span><input type="text" id="aadhar" required /></label>
-        <label>PAN No <span class="required">*</span><input type="text" id="pan" required /></label>
+        <h3>📄 Personal Details</h3>
+        <label>Full Name <span class="required">*</span>
+          <input type="text" id="fullName" required />
+        </label>
 
-        <h3>📚 Education</h3>
-        <label>10th School Name  <span class="required">*</span><input type="text" required /></label>
-        <label>10th Certificate <span class="required">*</span><input type="file" id="cert10" accept=".pdf,.doc" required /></label>
-        <label>Inter Certificate <span class="required">*</span><input type="file" id="certInter" accept=".pdf,.doc" required /></label>
-        <label>Degree Certificate <span class="required">*</span><input type="file" id="certDegree" accept=".pdf,.doc" required /></label>
+        <label>Phone No <span class="required">*</span>
+          <input type="text" id="phone" placeholder="+91" required />
+        </label>
 
-        <h3>🏢 Experience</h3>
-        <label>Previous Company Name <span class="required">*</span><input type="text" id="company" required /></label>
-        <label>Offer Letter <span class="required">*</span><input type="file" id="offer" accept=".pdf,.doc" required /></label>
-        <label>Experience Letter <span class="required">*</span><input type="file" id="expLetter" accept=".pdf,.doc" required /></label>
-        <label>Relieving Letter <span class="required">*</span><input type="file" id="relieve" accept=".pdf,.doc" required /></label>
-        <label>Pay Slips <span class="required">*</span><input type="file" id="payslip" accept=".pdf,.doc" required /></label>
+        <label>Email <span class="required">*</span>
+          <input type="email" id="email" required />
+        </label>
+
+        <label>Aadhar No <span class="required">*</span>
+          <input type="text" id="aadhar" required />
+        </label>
+
+        <label>PAN No <span class="required">*</span>
+          <input type="text" id="pan" required />
+        </label>
+
+        <h3>📁 Document Uploads</h3>
+        <label>10th Certificate (PDF or DOC) <span class="required">*</span>
+          <input type="file" id="cert10" accept=".pdf,.doc" required />
+        </label>
+
+        <label>Inter Certificate (PDF or DOC) <span class="required">*</span>
+          <input type="file" id="certInter" accept=".pdf,.doc" required />
+        </label>
+
+        <label>Degree Certificate (PDF or DOC) <span class="required">*</span>
+          <input type="file" id="certDegree" accept=".pdf,.doc" required />
+        </label>
+
+        <label>Previous Company Name <span class="required">*</span>
+          <input type="text" id="company" required />
+        </label>
+
+        <label>Offer Letter (PDF or DOC) <span class="required">*</span>
+          <input type="file" id="offer" accept=".pdf,.doc" required />
+        </label>
+
+        <label>Experience Letter (PDF or DOC) <span class="required">*</span>
+          <input type="file" id="expLetter" accept=".pdf,.doc" required />
+        </label>
+
+        <label>Relieving Letter (PDF or DOC) <span class="required">*</span>
+          <input type="file" id="relieve" accept=".pdf,.doc" required />
+        </label>
+
+        <label>Pay Slips (PDF or DOC) <span class="required">*</span>
+          <input type="file" id="payslip" accept=".pdf,.doc" required />
+        </label>
 
         <button type="submit">Submit</button>
-        <div id="success-msg">✅ Experienced Form Submitted Successfully!</div>
+        <div id="success-msg">✅ Thank you! Your experience form was submitted successfully.</div>
       </form>
     </div>
   </div>
@@ -60,46 +95,49 @@
         errors.push("Email must be a valid @gmail.com address.");
         errorFields.push(email);
       }
+
       if (!/^\d{10}$/.test(phone.value)) {
         errors.push("Phone number must be 10 digits.");
         errorFields.push(phone);
       }
+
       if (!/^\d{12}$/.test(aadhar.value)) {
         errors.push("Aadhar number must be 12 digits.");
         errorFields.push(aadhar);
       }
+
       if (!/^\d{12}$/.test(pan.value)) {
         errors.push("PAN number must be 12 digits.");
         errorFields.push(pan);
       }
 
-      const files = {
-        cert10: "10th Certificate",
-        certInter: "Inter Certificate",
-        certDegree: "Degree Certificate",
-        offer: "Offer Letter",
-        expLetter: "Experience Letter",
-        relieve: "Relieving Letter",
-        payslip: "Pay Slips"
-      };
+      const fileFields = [
+        { id: "cert10", label: "10th Certificate" },
+        { id: "certInter", label: "Inter Certificate" },
+        { id: "certDegree", label: "Degree Certificate" },
+        { id: "offer", label: "Offer Letter" },
+        { id: "expLetter", label: "Experience Letter" },
+        { id: "relieve", label: "Relieving Letter" },
+        { id: "payslip", label: "Pay Slips" }
+      ];
 
-      for (const [id, label] of Object.entries(files)) {
-        const file = document.getElementById(id);
-        if (!file.files[0] || !/\.(pdf|doc)$/i.test(file.files[0].name)) {
-          errors.push(`${label} must be a valid PDF or DOC.`);
-          errorFields.push(file);
+      fileFields.forEach(field => {
+        const input = document.getElementById(field.id);
+        if (!input.files[0] || !/\.(pdf|doc)$/i.test(input.files[0].name)) {
+          errors.push(`${field.label} must be a valid PDF or DOC file.`);
+          errorFields.push(input);
         }
-      }
+      });
 
-      errorFields.forEach(f => f.classList.add("error"));
+      errorFields.forEach(field => field.classList.add("error"));
 
       if (errors.length > 0) {
         alert("🔴 Please fix:\n- " + errors.join("\n- "));
         return false;
       }
 
-      document.getElementById("success-msg").classList.add("show");
-      return false; // prevent actual submission for demo
+      document.getElementById("success-msg").style.display = "block";
+      return false; // prevent actual submission
     }
   </script>
 </body>

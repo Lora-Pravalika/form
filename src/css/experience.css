@@ -1,161 +1,170 @@
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to right, #e0ffe0, #ffffff);
+/* Reset + Base */
+* {
   margin: 0;
-  padding: 40px;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #f0fff0, #ffffff);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+body {
+  padding: 20px;
 }
 
+/* Page Layout */
 .page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  max-width: 850px;
+  margin: auto;
+  padding: 10px;
 }
-
-.header {
-  display: flex;
-  gap: 20px;
+/* Form Container */
+.forming {
+  background-color: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
 }
 
+/* Navigation */
+.header {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 30px;
+}
 .nav-tab {
-  padding: 10px 25px;
-  text-decoration: none;
+  padding: 10px 20px;
+  border: none;
   border-radius: 999px;
-  font-weight: 600;
-  background-color: #f0fff0;
+  background-color: #e6ffe6;
   color: green;
-  box-shadow: 0 2px 5px rgba(0, 128, 0, 0.1);
+  font-weight: bold;
+  text-decoration: none;
   transition: all 0.3s ease;
 }
-
-.nav-tab:hover {
-  background-color: #a3f7b5;
-  color: white;
-  transform: scale(1.05);
-}
-
 .nav-tab.active {
   background-color: green;
   color: white;
-  box-shadow: 0 4px 12px rgba(0, 128, 0, 0.3);
+}
+.nav-tab:hover {
+  background-color: #b7f3c2;
 }
 
-.forming {
-  background-color: white;
-  width: 100%;
-  max-width: 750px;
-  padding: 25px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  border-radius: 12px;
-  box-sizing: border-box;
-  animation: fadeIn 0.6s ease-out;
-}
-
+/* Headings */
 .form-header {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
-
-.form-header h2 {
-  color: rgb(22, 87, 22);
+h2 {
+  font-size: 26px;
+  color: green;
+  margin-bottom: 8px;
 }
-
-.form-header p {
-  color: gray;
-  font-style: italic;
-}
-
 h3 {
-  margin-top: 30px;
-  color: #155724;
   font-size: 18px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  color: #2b722b;
+  border-bottom: 2px solid #e0ffe0;
+  padding-bottom: 4px;
 }
 
+/* Text & Labels */
 label {
   display: block;
-  margin: 15px 0 5px;
+  margin: 15px 0 6px;
   font-weight: 500;
 }
-
-input {
-  width: 100%;
-  padding: 10px;
-  margin-top: 4px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-input:focus {
-  border-color: green;
-  box-shadow: 0 0 5px rgba(0, 128, 0, 0.4);
-  outline: none;
-}
-
-input.error {
-  border: 2px solid red;
-  outline: none;
-}
-
 .required {
   color: red;
   font-size: 12px;
   margin-left: 4px;
 }
+p {
+  font-style: italic;
+  color: #2b722b;
+  font-size: 15px;
+}
 
+/* Inputs */
+input[type="text"],
+input[type="email"],
+input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: 0.3s ease;
+}
+input:focus {
+  border-color: green;
+  box-shadow: 0 0 5px rgba(0, 128, 0, 0.3);
+  outline: none;
+}
+input.error {
+  border: 2px solid red;
+}
+
+/* Button */
 button {
+  margin-top: 30px;
+  width: 100%;
+  max-width: 240px;
+  padding: 12px;
+  border: none;
   background-color: green;
   color: white;
   font-weight: bold;
-  border: none;
-  cursor: pointer;
-  width: 180px;
-  height: 45px;
-  margin: 30px auto 0;
-  display: block;
   border-radius: 8px;
+  cursor: pointer;
   transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: darkgreen;
-}
-
-#success-msg {
-  text-align: center;
-  margin-top: 20px;
-  color: green;
-  font-weight: bold;
-  display: none;
-}
-
-#success-msg.show {
   display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+button:hover {
+  background-color: rgb(2, 80, 2);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Success Message */
+#success-msg {
+  display: none;
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #d4edda;
+  color: #155724;
+  text-align: center;
+  border-radius: 6px;
+  font-weight: bold;
 }
 
+/* Mobile Responsive */
 @media (max-width: 600px) {
+  .page {
+    padding: 20px 15px;
+  }
+  .forming {
+    padding: 20px;
+  }
   .header {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    gap: 10px;
   }
-
   .nav-tab {
+    width: fit-content;
     font-size: 14px;
+    padding: 8px 14px;
   }
-
-  .forming {
-    padding: 15px;
-  }
-
   h2 {
-    font-size: 20px;
+    font-size: 22px;
   }
-
   button {
     width: 100%;
   }
