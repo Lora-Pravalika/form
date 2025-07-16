@@ -14,6 +14,12 @@
     </div>
 
     <div class="forming">
+       <div class="progress-container">
+  <div class="progress-text">0% Completed</div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+  </div>
       <div class="form-header">
         <h2>💼 Experienced Application</h2>
         <p>Please upload your previous employment documents.</p>
@@ -38,19 +44,23 @@
         </label>
 
         <label>PAN No <span class="required">*</span>
-          <input type="text" id="pan" required />
+                      <span class="tooltip">[Format: ABCDE1234F]</span>
+<input type="text" id="pan" required />
         </label>
 
         <h3>📁 Document Uploads</h3>
-        <label>10th Certificate (PDF or DOC) <span class="required">*</span>
+        <label>10th Certificate  <span class="required">*</span>
+           <span class="tooltip">[PDF or DOC]</span>
           <input type="file" id="cert10" accept=".pdf,.doc" required />
         </label>
 
-        <label>Inter Certificate (PDF or DOC) <span class="required">*</span>
+        <label>Inter Certificate <span class="required">*</span>
+           <span class="tooltip">[PDF or DOC]</span>
           <input type="file" id="certInter" accept=".pdf,.doc" required />
         </label>
 
-        <label>Degree Certificate (PDF or DOC) <span class="required">*</span>
+        <label>Degree Certificate  <span class="required">*</span>
+           <span class="tooltip">[PDF or DOC]</span>
           <input type="file" id="certDegree" accept=".pdf,.doc" required />
         </label>
 
@@ -58,19 +68,23 @@
           <input type="text" id="company" required />
         </label>
 
-        <label>Offer Letter (PDF or DOC) <span class="required">*</span>
+        <label>Offer Letter  <span class="required">*</span>
+           <span class="tooltip">[PDF or DOC]</span>
           <input type="file" id="offer" accept=".pdf,.doc" required />
         </label>
 
-        <label>Experience Letter (PDF or DOC) <span class="required">*</span>
+        <label>Experience Letter  <span class="required">*</span>
+           <span class="tooltip">[PDF or DOC]</span>
           <input type="file" id="expLetter" accept=".pdf,.doc" required />
         </label>
 
-        <label>Relieving Letter (PDF or DOC) <span class="required">*</span>
+        <label>Relieving Letter  <span class="required">*</span>
+           <span class="tooltip">[PDF or DOC]</span>
           <input type="file" id="relieve" accept=".pdf,.doc" required />
         </label>
 
-        <label>Pay Slips (PDF or DOC) <span class="required">*</span>
+        <label>Pay Slips  <span class="required">*</span>
+           <span class="tooltip">[PDF or DOC]</span>
           <input type="file" id="payslip" accept=".pdf,.doc" required />
         </label>
 
@@ -106,10 +120,10 @@
         errorFields.push(aadhar);
       }
 
-      if (!/^\d{12}$/.test(pan.value)) {
-        errors.push("PAN number must be 12 digits.");
-        errorFields.push(pan);
-      }
+     if (!/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(pan.value)) {
+  errors.push("PAN number must be in format: 5 letters, 4 digits, 1 letter (e.g., ABCDE1234F).");
+  errorFields.push(pan);
+}
 
       const fileFields = [
         { id: "cert10", label: "10th Certificate" },
@@ -137,8 +151,29 @@
       }
 
       document.getElementById("success-msg").style.display = "block";
-      return false; // prevent actual submission
+      return false; 
     }
+    document.querySelectorAll("input").forEach(input => {
+  input.addEventListener("input", updateProgress);
+});
+
+function updateProgress() {
+  const inputs = Array.from(document.querySelectorAll("input[type='text'], input[type='email'], input[type='file']"));
+  let filled = 0;
+
+  inputs.forEach(input => {
+    if (
+      (input.type === "file" && input.files.length > 0) ||
+      (input.type !== "file" && input.value.trim() !== "")
+    ) {
+      filled++;
+    }
+  });
+
+  const percent = Math.round((filled / inputs.length) * 100);
+  document.getElementById("progressFill").style.width = percent + "%";
+  document.querySelector(".progress-text").textContent = percent + "% Completed";
+}
   </script>
 </body>
 </html>

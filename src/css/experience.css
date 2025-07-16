@@ -1,4 +1,4 @@
-/* Reset + Base */
+
 * {
   margin: 0;
   padding: 0;
@@ -14,23 +14,31 @@ html, body {
 body {
   padding: 20px;
 }
+.tooltip {
+  font-size: 12px;
+  color: #888;
+  margin-left: 6px;
+}
 
-/* Page Layout */
+
 .page {
   max-width: 850px;
   margin: auto;
   padding: 10px;
 }
-/* Form Container */
+
 .forming {
   background-color: white;
   padding: 25px;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
+  margin: 0 auto 30px;
+  max-width: 700px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* Navigation */
+
 .header {
   display: flex;
   justify-content: flex-start;
@@ -56,7 +64,7 @@ body {
   background-color: #b7f3c2;
 }
 
-/* Headings */
+
 .form-header {
   text-align: center;
   margin-bottom: 25px;
@@ -75,7 +83,7 @@ h3 {
   padding-bottom: 4px;
 }
 
-/* Text & Labels */
+
 label {
   display: block;
   margin: 15px 0 6px;
@@ -92,7 +100,7 @@ p {
   font-size: 15px;
 }
 
-/* Inputs */
+
 input[type="text"],
 input[type="email"],
 input[type="file"] {
@@ -101,11 +109,13 @@ input[type="file"] {
   border: 1px solid #ccc;
   border-radius: 6px;
   transition: 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 input:focus {
   border-color: green;
   box-shadow: 0 0 5px rgba(0, 128, 0, 0.3);
   outline: none;
+    background-color: #eaffea;
 }
 input.error {
   border: 2px solid red;
@@ -118,7 +128,7 @@ button {
   max-width: 240px;
   padding: 12px;
   border: none;
-  background-color: green;
+  background-color: rgb(3, 83, 3);
   color: white;
   font-weight: bold;
   border-radius: 8px;
@@ -132,7 +142,7 @@ button:hover {
   background-color: rgb(2, 80, 2);
 }
 
-/* Success Message */
+
 #success-msg {
   display: none;
   margin-top: 20px;
@@ -143,18 +153,39 @@ button:hover {
   border-radius: 6px;
   font-weight: bold;
 }
+.progress-container {
+  margin-bottom: 20px;
+}
+.progress-text {
+  font-size: 14px;
+  font-weight: bold;
+  color: #2b722b;
+  margin-bottom: 6px;
+}
+.progress-bar {
+  height: 12px;
+  background-color: #e6ffe6;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background-color: green;
+  transition: width 0.3s ease;
+}
 
-/* Mobile Responsive */
 @media (max-width: 600px) {
   .page {
     padding: 20px 15px;
   }
   .forming {
-    padding: 20px;
+    padding: 20px 15px;
   }
   .header {
-    flex-direction: column;
-    align-items: flex-start;
+     flex-direction: row; 
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 10px;
   }
   .nav-tab {

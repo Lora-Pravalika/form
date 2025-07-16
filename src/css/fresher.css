@@ -1,4 +1,4 @@
-/* Reset + Base */
+
 * {
   margin: 0;
   padding: 0;
@@ -14,14 +14,36 @@ body {
   padding: 20px;
 }
 
-/* Page Container */
+
 .page {
   max-width: 850px;
   margin: auto;
   padding: 10px;
 }
 
-/* Navigation */
+.progress-container {
+  margin-bottom: 20px;
+}
+.progress-text {
+  font-size: 14px;
+  font-weight: bold;
+  color: #2b722b;
+  margin-bottom: 6px;
+}
+.progress-bar {
+  height: 12px;
+  background-color: #e6ffe6;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background-color: green;
+  transition: width 0.3s ease;
+}
+
+
 .header {
   display: flex;
   justify-content: flex-start;
@@ -48,17 +70,20 @@ body {
   background-color: #b7f3c2;
 }
 
-/* Form Container */
+
 .forming {
   background-color: white;
   padding: 25px;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 0 auto 30px;
+  max-width: 700px;
+  width: 100%;
   box-sizing: border-box;
-  
 }
 
-/* Headers */
+
+
 .form-header {
   text-align: center;
   margin-bottom: 25px;
@@ -81,7 +106,7 @@ p {
   color: #2b722b;
 }
 
-/* Form Labels & Inputs */
+
 label {
   display: block;
   margin: 15px 0 6px;
@@ -100,14 +125,21 @@ input[type="file"] {
   border: 1px solid #ccc;
   border-radius: 6px;
   transition: 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 input:focus {
   border-color: green;
   box-shadow: 0 0 5px rgba(0, 128, 0, 0.3);
   outline: none;
+  background-color: #eaffea;
 }
 input.error {
   border: 2px solid red;
+}
+.tooltip {
+  font-size: 12px;
+  color: #888;
+  margin-left: 6px;
 }
 
 /* Button */
@@ -117,7 +149,7 @@ button {
   max-width: 240px;
   padding: 12px;
   border: none;
-  background-color: green;
+  background-color: rgb(10, 80, 10);
   color: white;
   font-weight: bold;
   border-radius: 8px;
@@ -131,7 +163,7 @@ button:hover {
   background-color: darkgreen;
 }
 
-/* Success Message */
+
 #success-msg {
   display: none;
   margin-top: 20px;
@@ -143,13 +175,18 @@ button:hover {
   font-weight: bold;
 }
 
-/* Mobile Responsive */
+
 @media (max-width: 600px) {
   .page {
     padding: 10px;
   }
+   .forming {
+    padding: 20px 15px;
+  }
   .header {
-    flex-direction: column;
+     flex-direction: row; 
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 10px;
   }
   .nav-tab {
