@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Employee Benefit Form</title>
+  <link rel="stylesheet" href="src/css/benifitsform.css" />
+</head>
+<body>
+  <div class="form-container">
+    <h2>Employee Benefits Form</h2>
+    
+    <form>
+      <label for="employee">Employee</label>
+      <input type="text" id="employee" name="employee" required />
+
+      <label for="benefit_type">Benefit Type</label>
+      <input type="text" id="benefit_type" name="benefit_type" required />
+
+      <label for="provider">Provider</label>
+      <input type="text" id="provider" name="provider" required />
+
+      <label for="policy_number">Policy Number</label>
+      <input type="text" id="policy_number" name="policy_number" required />
+
+      <label for="start_date">Start Date</label>
+      <input type="date" id="start_date" name="start_date" required />
+
+      <label for="end_date">End Date</label>
+      <input type="date" id="end_date" name="end_date" required />
+
+      <label for="coverage_details">Coverage Details</label>
+      <textarea id="coverage_details" name="coverage_details" placeholder="Enter coverage details" required></textarea>
+
+      <button type="submit">📤 Submit</button>
+    </form>
+  </div>
+</body>
+</html>
